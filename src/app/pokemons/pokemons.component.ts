@@ -9,19 +9,28 @@ import { PokemonUrl } from '../interfaces/pokemon-url';
 })
 export class PokemonsComponent implements OnInit {
   pokemons: PokemonUrl[] = [];
+  images: string[] = [];
   constructor(private webService: WebService) {}
 
-  getPokemon() {
+  getPokemons() {
     this.webService.getAllPokemons().subscribe((resultObject) => {
       console.log(resultObject);
       resultObject.results.forEach((pokemon) => {
         this.pokemons.push(pokemon);
+
+        this.getImage(pokemon.url);
       });
-      console.log(this.pokemons);
+    });
+  }
+
+  getImage(url: string) {
+    this.webService.getPokemon(url).subscribe((resultObject) => {
+      console.log(resultObject.sprites.other.dream_world.front_default);
+      this.images.push(resultObject.sprites.other.dream_world.front_default);
     });
   }
 
   ngOnInit(): void {
-    this.getPokemon();
+    this.getPokemons();
   }
 }
