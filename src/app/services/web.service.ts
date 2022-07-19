@@ -4,17 +4,20 @@ import { delay } from 'rxjs';
 import { GetRequest } from '../interfaces/get-request';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WebService {
-  private api = 'https://pokeapi.co/api/v2/pokemon/';
+  private api = 'https://pokeapi.co/api/v2/';
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {}
 
-   }
+  getAllPokemons() {
+    const path = `${this.api}pokemon/?limit=24`;
+    return this.http.get<GetRequest>(path).pipe(delay(1000));
+  }
 
-   getAllPokemons() {
-    const path = `${this.api}/?limit=24`;
+  getAllTags() {
+    const path = `${this.api}type/`;
     return this.http.get<GetRequest>(path).pipe(delay(1000));
   }
 }
