@@ -9,9 +9,18 @@ import { GetPokemon } from '../interfaces/get-pokemon';
 })
 export class PokemonStatsComponent implements OnInit {
   currentPokemon: GetPokemon = this.currentStatsService.currentPokemon;
+  abilities = '';
+
+  convertAbilitiesToStr() {
+    console.log(this.currentPokemon.abilities);
+    this.abilities = this.currentPokemon.abilities
+      .map((user) => user.ability.name)
+      .toString();
+  }
   constructor(public currentStatsService: CurrentStatsService) {}
 
   ngOnInit(): void {
-    console.log(this.currentPokemon);
+    console.log(this.currentPokemon, 'from POKEMON STATS COMPONENT');
+    this.convertAbilitiesToStr();
   }
 }

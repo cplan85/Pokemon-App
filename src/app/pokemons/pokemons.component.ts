@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WebService } from '../services/web.service';
+import { CurrentStatsService } from '../services/current-stats.service';
 import { PokemonUrl } from '../interfaces/pokemon-url';
 import { Router } from '@angular/router';
+import { GetPokemon } from '../interfaces/get-pokemon';
 
 @Component({
   selector: 'app-pokemons',
@@ -9,31 +11,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./pokemons.component.scss'],
 })
 export class PokemonsComponent implements OnInit {
-  pokemons: PokemonUrl[] = [];
+  pokemonsInit: PokemonUrl[] = [];
   images: string[] = [];
-  constructor(private webService: WebService, public router: Router) {}
+  fullPokemons: GetPokemon[] = [];
+  constructor(
+    private webService: WebService,
+    public router: Router,
+    private currentStatsService: CurrentStatsService
+  ) {}
 
   getPokemons() {
     this.webService.getAllPokemons().subscribe((resultObject) => {
       console.log(resultObject);
       resultObject.results.forEach((pokemon) => {
-        this.pokemons.push(pokemon);
+        this.pokemonsInit.push(pokemon);
 
         this.getImage(pokemon.url);
+        console.log('full pokemon', this.fullPokemons);
       });
     });
   }
 
   getImage(url: string) {
-    this.webService.getPokemon(url).subscribe((resultObject) => {
-      console.log(resultObject.types);
-      this.images.push(resultObject.sprites.other.dream_world.front_default);
+    this.webService.getPokemon(url).subscribe((fullPokemon) => {
+      this.fullPokemons.push(fullPokemon);
+      this.images.push(fullPokemon.sprites.other.dream_world.front_default);
     });
   }
 
   navigateToPokemon(index: number) {
-    //make array into full pokemon Array. You cant extract from array of just name and url
-    //this.currentStarshipService.setCurrentStarship(this.starships[index]);
+    this.currentStatsService.setCurrentPokemon(this.fullPokemons[index]);
     this.router.navigate(['stats'], {
       queryParams: {
         id: index,

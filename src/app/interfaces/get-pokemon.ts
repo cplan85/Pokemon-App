@@ -1,7 +1,7 @@
 import { PokeImages } from './poke-images';
 export interface GetPokemon {
   name: string;
-  abilities: []; //Included
+  abilities: { ability: { name: string; url: string } }[]; //Included
   forms: [];
   game_indices: [];
   held_items: [];

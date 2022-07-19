@@ -1,4 +1,4 @@
-import { GetPokemon } from './../interfaces/get-pokemon';
+import { GetPokemon } from '../interfaces/get-pokemon';
 import { Injectable } from '@angular/core';
 
 @Injectable({
