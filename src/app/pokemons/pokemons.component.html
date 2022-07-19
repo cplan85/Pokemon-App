@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div *ngFor="let pokemon of pokemons; let i = index" class="col-2">
+            <div class="card w-100 m-2" style="width: 18rem;">
+                <h4 class="m-3">{{pokemon.name}}</h4>
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <!-- <p class="card-text">{{pokemon.name}}</p> -->
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

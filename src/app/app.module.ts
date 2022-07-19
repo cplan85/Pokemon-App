@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TagsComponent } from './tags/tags.component';
+import { PokemonsComponent } from './pokemons/pokemons.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, TagsComponent],
+  declarations: [AppComponent, HomeComponent, TagsComponent, PokemonsComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
