@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TagsComponent } from './tags/tags.component';
 import { PokemonsComponent } from './pokemons/pokemons.component';
+import { PokemonStatsComponent } from './pokemon-stats/pokemon-stats.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, TagsComponent, PokemonsComponent],
+  declarations: [AppComponent, HomeComponent, TagsComponent, PokemonsComponent, PokemonStatsComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
