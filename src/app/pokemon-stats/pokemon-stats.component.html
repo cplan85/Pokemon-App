@@ -30,8 +30,8 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><h3>Base Stats</h3></li>
+                    <ul class="list-group list-group-flush bg-secondary">
+                        <li class="list-group-item "><h3>Base Stats</h3></li>
                         <li class="list-group-item"><div class="d-flex justify-content-between"><span>HP</span><span>{{currentPokemon.stats[0].base_stat}}</span></div></li>
                         <li class="list-group-item"><div class="d-flex justify-content-between"><span>Attack</span><span>{{currentPokemon.stats[1].base_stat}}</span></div></li>
                         <li class="list-group-item"><div class="d-flex justify-content-between"><span>Defense</span><span>{{currentPokemon.stats[2].base_stat}}</span></div></li>
@@ -43,8 +43,20 @@
             </div>
         </div>
         <div class="col-4">
-            <img class="" src="{{currentPokemon.sprites.other['official-artwork'].front_default}}" class="img-fluid w-50 mx-auto d-block" alt="...">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam incidunt, magni ex atque voluptatum officiis reiciendis pariatur cumque doloribus, ab fuga reprehenderit illum porro voluptate id tempore eveniet sapiente nisi.
+            <img src="{{currentPokemon.sprites.other['official-artwork'].front_default}}" class="img-fluid w-100 p-2 mx-auto d-block" alt="...">
+        </div>
+    </div>
+    <div class="mid-stats">
+        <h2>Species Information</h2>
+        <div class="row">
+            <div class="col-mid">
+            <h3>Name</h3>
+            <p></p>
+        </div>
+        <div class="col-mid">
+            <h3>Generation</h3>
+            <p></p>
+        </div>
         </div>
     </div>
     <p>pokemon-stats works!</p>

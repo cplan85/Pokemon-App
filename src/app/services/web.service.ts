@@ -26,4 +26,8 @@ export class WebService {
     const path = `${this.api}type/`;
     return this.http.get<GetRequest>(path).pipe(delay(1000));
   }
+
+  getSpeciesInfo(name: string) {
+    const path = `${this.api}pokemon-species/${name}`;
+  }
 }
