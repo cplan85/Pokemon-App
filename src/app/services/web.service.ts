@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { delay } from 'rxjs';
 import { GetRequest } from '../interfaces/get-request';
 import { GetPokemon } from '../interfaces/get-pokemon';
+import { SpeciesInfo } from '../interfaces/species-info';
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +30,6 @@ export class WebService {
 
   getSpeciesInfo(name: string) {
     const path = `${this.api}pokemon-species/${name}`;
+    return this.http.get<SpeciesInfo>(path).pipe(delay(1000));
   }
 }
