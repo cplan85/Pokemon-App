@@ -12,7 +12,7 @@ export interface GetPokemon {
   past_types: [];
   moves: [];
   species: {};
-  stats: [];
+  stats: {stat:{name:string, url: string}, effort: number, base_stat: number}[];
   types: TypeObject[];
   weight: number;
   sprites: { other: PokeImages };

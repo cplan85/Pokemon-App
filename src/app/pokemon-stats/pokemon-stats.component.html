@@ -30,10 +30,12 @@
         <div class="col-6">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><h3>Base Stats</h3></li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-                <li class="list-group-item">A fourth item</li>
-                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item"><div class="d-flex justify-content-between"><span>HP</span><span>{{currentPokemon.stats[0].base_stat}}</span></div></li>
+                <li class="list-group-item"><div class="d-flex justify-content-between"><span>Attack</span><span>{{currentPokemon.stats[1].base_stat}}</span></div></li>
+                <li class="list-group-item"><div class="d-flex justify-content-between"><span>Defense</span><span>{{currentPokemon.stats[2].base_stat}}</span></div></li>
+                <li class="list-group-item"><div class="d-flex justify-content-between"><span>Special Attack</span><span>{{currentPokemon.stats[3].base_stat}}</span></div></li>
+                <li class="list-group-item"><div class="d-flex justify-content-between"><span>Special Defense</span><span>{{currentPokemon.stats[4].base_stat}}</span></div></li>
+                <li class="list-group-item"><div class="d-flex justify-content-between"><span>Speed</span><span>{{currentPokemon.stats[5].base_stat}}</span></div></li>
               </ul>
         </div>
     </div>
