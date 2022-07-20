@@ -12,7 +12,7 @@ import { GetPokemon } from '../interfaces/get-pokemon';
 })
 export class PokemonsComponent implements OnInit {
   pokemonsInit: PokemonUrl[] = [];
-  images: string[] = [];
+  images: {}[] = [];
   fullPokemons: GetPokemon[] = [];
   constructor(
     private webService: WebService,
@@ -29,21 +29,22 @@ export class PokemonsComponent implements OnInit {
         this.getImage(pokemon.url);
         console.log('full pokemon', this.fullPokemons);
       });
-      this.images = this.images.sort();
-      console.log(this.images, "sorted")
     });
   }
 
   getImage(url: string) {
     this.webService.getPokemon(url).subscribe((fullPokemon) => {
       this.fullPokemons.push(fullPokemon);
-      const id = fullPokemon.sprites.other.dream_world.front_default.replace(/[^0-9]/g,'');
-      console.log(id, "id")
+      const id = fullPokemon.sprites.other.dream_world.front_default.replace(
+        /[^0-9]/g,
+        ''
+      );
 
-      this.images.push(fullPokemon.sprites.other.dream_world.front_default);
+      this.images[parseInt(id) - 1] =
+        fullPokemon.sprites.other.dream_world.front_default;
     });
-    
-    console.log(this.images, "Images from GetImages")
+
+    console.log(this.images, 'Images from GetImages');
   }
 
   navigateToPokemon(index: number) {

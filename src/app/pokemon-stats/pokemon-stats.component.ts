@@ -22,5 +22,10 @@ export class PokemonStatsComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.currentPokemon, 'from POKEMON STATS COMPONENT');
     this.convertAbilitiesToStr();
+
+    console.log(
+      this.currentPokemon.sprites.other['official-artwork'],
+      'IMAGES STORE'
+    );
   }
 }
