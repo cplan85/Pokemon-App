@@ -82,11 +82,9 @@
     <div class="evolution-stats my-5 ">
         <h2>Evolution Chain</h2>
 
-        <div class="d-flex flex-row w-100">
-            <div *ngFor="let chain of evoChainClean; let i = index" class="col-sm-6 col-md-4
-            col-lg-3 col-xl-2
-            col-12 ">
-            <div class="card" style="width: 18rem;">
+        <div class="d-flex row w-100">
+            <div *ngFor="let chain of evoChainClean; let i = index" class="col-4 ">
+            <div class="card mr-4 my-5 rounded-3" style="width: 18rem;">
                 <img src="{{'..'}}" onError="this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
                 <div class="card-body">
                   <p class="card-text">{{chain.species_name}}</p>

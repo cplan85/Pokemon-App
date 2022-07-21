@@ -1,3 +1,4 @@
+import { LocalImagesService } from './../services/local-images.service';
 import { Component, OnInit } from '@angular/core';
 import { WebService } from '../services/web.service';
 import { CurrentStatsService } from '../services/current-stats.service';
@@ -17,12 +18,12 @@ export class PokemonsComponent implements OnInit {
   constructor(
     private webService: WebService,
     public router: Router,
-    private currentStatsService: CurrentStatsService
+    private currentStatsService: CurrentStatsService,
+    private localImageService: LocalImagesService
   ) {}
 
   getPokemons() {
     this.webService.getAllPokemons().subscribe((resultObject) => {
-      console.log(resultObject,"results");
       resultObject.results.forEach((pokemon) => {
 
         this.pokemonsInit.push(pokemon);
@@ -56,7 +57,6 @@ export class PokemonsComponent implements OnInit {
       },
       queryParamsHandling: 'merge',
     });
-    // this.webService.setCurrentIndex(index);
   }
 
   ngOnInit(): void {
