@@ -6,6 +6,7 @@ import { PokemonUrl } from '../interfaces/pokemon-url';
 import { Router } from '@angular/router';
 import { GetPokemon } from '../interfaces/get-pokemon';
 import { LocalImages } from '../interfaces/local-images';
+import { LocalPokemonsService } from '../services/local-pokemons.service';
 
 @Component({
   selector: 'app-pokemons',
@@ -20,7 +21,8 @@ export class PokemonsComponent implements OnInit {
     private webService: WebService,
     public router: Router,
     private currentStatsService: CurrentStatsService,
-    private localImageService: LocalImagesService
+    private localImageService: LocalImagesService,
+    private localPokemonService: LocalPokemonsService
   ) {}
 
   getPokemons() {
@@ -28,13 +30,12 @@ export class PokemonsComponent implements OnInit {
       resultObject.results.forEach((pokemon) => {
         this.pokemonsInit.push(pokemon);
 
-        this.getImage(pokemon.url);
-        //console.log('full pokemon', this.fullPokemons);
+        this.getImage_and_fullPokemon(pokemon.url);
       });
     });
   }
 
-  getImage(url: string) {
+  getImage_and_fullPokemon(url: string) {
     this.webService.getPokemon(url).subscribe((fullPokemon) => {
       const id = fullPokemon.sprites.other.dream_world.front_default.replace(
         /[^0-9]/g,
@@ -46,7 +47,7 @@ export class PokemonsComponent implements OnInit {
         pokemonName: fullPokemon.name,
       };
     });
-
+    this.localPokemonService.setlocalPokemons(this.fullPokemons);
     this.localImageService.setlocalImages(this.images);
   }
 
