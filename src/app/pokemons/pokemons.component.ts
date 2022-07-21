@@ -22,8 +22,9 @@ export class PokemonsComponent implements OnInit {
 
   getPokemons() {
     this.webService.getAllPokemons().subscribe((resultObject) => {
-      console.log(resultObject);
+      console.log(resultObject,"results");
       resultObject.results.forEach((pokemon) => {
+
         this.pokemonsInit.push(pokemon);
 
         this.getImage(pokemon.url);
@@ -34,12 +35,12 @@ export class PokemonsComponent implements OnInit {
 
   getImage(url: string) {
     this.webService.getPokemon(url).subscribe((fullPokemon) => {
-      this.fullPokemons.push(fullPokemon);
+     
       const id = fullPokemon.sprites.other.dream_world.front_default.replace(
         /[^0-9]/g,
         ''
       );
-
+      this.fullPokemons[parseInt(id)-1] = fullPokemon
       this.images[parseInt(id) - 1] =
         fullPokemon.sprites.other.dream_world.front_default;
     });

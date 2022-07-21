@@ -30,6 +30,6 @@ export class WebService {
 
   getSpeciesInfo(name: string) {
     const path = `${this.api}pokemon-species/${name}`;
-    return this.http.get<SpeciesInfo>(path).pipe(delay(1000));
+    return this.http.get<SpeciesInfo>(path);
   }
 }

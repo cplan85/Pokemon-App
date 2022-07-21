@@ -1,5 +1,6 @@
 import { GetPokemon } from '../interfaces/get-pokemon';
 import { Injectable } from '@angular/core';
+import { SpeciesInfo } from '../interfaces/species-info';
 
 @Injectable({
   providedIn: 'root',
@@ -30,10 +31,17 @@ export class CurrentStatsService {
     },
     height: 0,
   };
+  
+  currentSpecies: SpeciesInfo;
+  
 
   constructor() {}
 
   setCurrentPokemon(pokemon: GetPokemon) {
     this.currentPokemon = pokemon;
+  }
+  
+  setCurrentSpecies(speciesInfo: SpeciesInfo) {
+    this.currentSpecies = speciesInfo;
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CurrentStatsService } from '../services/current-stats.service';
 import { GetPokemon } from '../interfaces/get-pokemon';
 import { WebService } from '../services/web.service';
+import { SpeciesInfo } from '../interfaces/species-info';
 
 @Component({
   selector: 'app-pokemon-stats',
@@ -11,6 +12,7 @@ import { WebService } from '../services/web.service';
 export class PokemonStatsComponent implements OnInit {
   currentPokemon: GetPokemon = this.currentStatsService.currentPokemon;
   abilities = '';
+  currentSpecies: SpeciesInfo; 
 
   constructor(
     public currentStatsService: CurrentStatsService,
@@ -26,7 +28,9 @@ export class PokemonStatsComponent implements OnInit {
 
   getSpeciesInfo(pokemonName: string) {
     this.webService.getSpeciesInfo(pokemonName).subscribe((resultObject) => {
-      console.log(resultObject, 'SpeciesInfo');
+      this.currentStatsService.setCurrentSpecies(resultObject);
+      this.currentSpecies = resultObject;
+      console.log(resultObject, "species");
     });
   }
 
@@ -34,10 +38,5 @@ export class PokemonStatsComponent implements OnInit {
     console.log(this.currentPokemon, 'from POKEMON STATS COMPONENT');
     this.convertAbilitiesToStr();
     this.getSpeciesInfo(this.currentPokemon.name);
-
-    console.log(
-      this.currentPokemon.sprites.other['official-artwork'],
-      'IMAGES STORE'
-    );
   }
 }

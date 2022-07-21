@@ -48,16 +48,39 @@
     </div>
     <div class="mid-stats">
         <h2>Species Information</h2>
-        <div class="row">
+        <div class="row d-flex flex-row flex-wrap">
             <div class="col-mid">
             <h3>Name</h3>
-            <p></p>
+            <p>{{currentPokemon.name}}</p>
         </div>
         <div class="col-mid">
             <h3>Generation</h3>
-            <p></p>
+            <p>{{currentSpecies.generation.name}}</p>
+        </div>
+        <div class="col-mid">
+            <h3>Genus</h3>
+            <p>{{currentSpecies.genera[0].genus}}</p>
+        </div>
+        <div class="col-mid">
+            <h3>Color</h3>
+            <p>{{currentSpecies.color.name}}</p>
+        </div>
+        <div class="col-mid">
+            <h3>Habitat</h3>
+            <p>{{currentSpecies.habitat.name}}</p>
+        </div>
+        <div class="col-mid">
+            <h3>Capture Rate</h3>
+            <p>{{currentSpecies.capture_rate}}</p>
+        </div>
+        <div class="col-mid">
+            <h3>Growth Rate</h3>
+            <p>{{currentSpecies.growth_rate.name}}</p>
         </div>
         </div>
+    </div>
+    <div class="evolution-stats">
+        <h2>Evolution Chain</h2>
     </div>
     <p>pokemon-stats works!</p>
 </div>
