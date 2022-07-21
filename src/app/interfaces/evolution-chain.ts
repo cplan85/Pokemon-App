@@ -87,7 +87,7 @@
         species: Species3;
     }
 
-    export interface EvolutionChain {
+    export interface EvolutionChainCall {
         baby_trigger_item?: any;
         chain: Chain;
         id: number;

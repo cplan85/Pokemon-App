@@ -12,7 +12,7 @@ import { GetPokemon } from '../interfaces/get-pokemon';
 })
 export class PokemonsComponent implements OnInit {
   pokemonsInit: PokemonUrl[] = [];
-  images: {}[] = [];
+  images: {image: string, name: string}[] = [];
   fullPokemons: GetPokemon[] = [];
   constructor(
     private webService: WebService,
@@ -42,7 +42,7 @@ export class PokemonsComponent implements OnInit {
       );
       this.fullPokemons[parseInt(id)-1] = fullPokemon
       this.images[parseInt(id) - 1] =
-        fullPokemon.sprites.other.dream_world.front_default;
+        {image: fullPokemon.sprites.other.dream_world.front_default, name: fullPokemon.name}
     });
 
     console.log(this.images, 'Images from GetImages');

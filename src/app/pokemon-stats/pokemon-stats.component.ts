@@ -3,7 +3,7 @@ import { CurrentStatsService } from '../services/current-stats.service';
 import { GetPokemon } from '../interfaces/get-pokemon';
 import { WebService } from '../services/web.service';
 import { SpeciesInfo } from '../interfaces/species-info';
-import { EvolutionChain } from '../interfaces/species-info';
+import { EvolutionChainCall } from '../interfaces/evolution-chain';
 
 @Component({
   selector: 'app-pokemon-stats',
@@ -14,7 +14,7 @@ export class PokemonStatsComponent implements OnInit {
   currentPokemon: GetPokemon = this.currentStatsService.currentPokemon;
   abilities = '';
   currentSpecies: SpeciesInfo; 
-  evolutionChain: EvolutionChain;
+  evolutionChain: EvolutionChainCall;
 
   constructor(
     public currentStatsService: CurrentStatsService,

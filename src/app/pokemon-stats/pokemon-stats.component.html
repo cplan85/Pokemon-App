@@ -49,31 +49,31 @@
     <div class="mid-stats">
         <h2>Species Information</h2>
         <div class="row d-flex flex-row flex-wrap">
-            <div class="col-mid">
+            <div class="col-2">
             <h3>Name</h3>
             <p>{{currentPokemon.name}}</p>
         </div>
-        <div class="col-mid">
+        <div class="col-2">
             <h3>Generation</h3>
             <p>{{currentSpecies.generation.name}}</p>
         </div>
-        <div class="col-mid">
+        <div class="col-2">
             <h3>Genus</h3>
             <p>{{currentSpecies.genera[0].genus}}</p>
         </div>
-        <div class="col-mid">
+        <div class="col-2">
             <h3>Color</h3>
             <p>{{currentSpecies.color.name}}</p>
         </div>
-        <div class="col-mid">
+        <div class="col-2">
             <h3>Habitat</h3>
             <p>{{currentSpecies.habitat.name}}</p>
         </div>
-        <div class="col-mid">
+        <div class="col-2">
             <h3>Capture Rate</h3>
             <p>{{currentSpecies.capture_rate}}</p>
         </div>
-        <div class="col-mid">
+        <div class="col-2">
             <h3>Growth Rate</h3>
             <p>{{currentSpecies.growth_rate.name}}</p>
         </div>
@@ -81,6 +81,27 @@
     </div>
     <div class="evolution-stats">
         <h2>Evolution Chain</h2>
+
+        <div class="card" style="width: 18rem;">
+            <img src="{{'..'}}" onError="this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
+            <div class="card-body">
+              <p class="card-text">{{evolutionChain.chain.species.name}}</p>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img src="{{'..'}}" onError="this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
+            <div class="card-body">
+              <p class="card-text">{{currentPokemon.name}}</p>
+            </div>
+          </div>
+
+          <div class="card" style="width: 18rem;">
+            <img src="{{'..'}}" onError="this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
+            <div class="card-body">
+              <p class="card-text">{{evolutionChain.chain.species.name}}</p>
+            </div>
+          </div>
     </div>
     <p>pokemon-stats works!</p>
 </div>
