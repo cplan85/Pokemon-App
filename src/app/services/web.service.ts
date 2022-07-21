@@ -4,6 +4,7 @@ import { delay } from 'rxjs';
 import { GetRequest } from '../interfaces/get-request';
 import { GetPokemon } from '../interfaces/get-pokemon';
 import { SpeciesInfo } from '../interfaces/species-info';
+import { EvolutionChain } from '../interfaces/species-info';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +32,10 @@ export class WebService {
   getSpeciesInfo(name: string) {
     const path = `${this.api}pokemon-species/${name}`;
     return this.http.get<SpeciesInfo>(path);
+  }
+
+  getEvolutionChain(fullUrl: string) {
+    const path = fullUrl;
+    return this.http.get<EvolutionChain>(path);
   }
 }
