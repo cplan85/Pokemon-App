@@ -46,7 +46,7 @@
             <img src="{{currentPokemon.sprites.other['official-artwork'].front_default}}" class="img-fluid w-100 p-2 mx-auto d-block" alt="...">
         </div>
     </div>
-    <div class="mid-stats">
+    <div class="mid-stats my-5">
         <h2>Species Information</h2>
         <div class="row d-flex flex-row flex-wrap">
             <div class="col-2">
@@ -79,29 +79,23 @@
         </div>
         </div>
     </div>
-    <div class="evolution-stats">
+    <div class="evolution-stats my-5 ">
         <h2>Evolution Chain</h2>
 
-        <div class="card" style="width: 18rem;">
-            <img src="{{'..'}}" onError="this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{evolutionChain.chain.species.name}}</p>
+        <div class="d-flex flex-row w-100">
+            <div *ngFor="let chain of evoChainClean; let i = index" class="col-sm-6 col-md-4
+            col-lg-3 col-xl-2
+            col-12 ">
+            <div class="card" style="width: 18rem;">
+                <img src="{{'..'}}" onError="this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
+                <div class="card-body">
+                  <p class="card-text">{{chain.species_name}}</p>
+                </div>
+              </div>
             </div>
-          </div>
+        </div>
 
-          <div class="card" style="width: 18rem;">
-            <img src="{{'..'}}" onError="this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{currentPokemon.name}}</p>
-            </div>
-          </div>
-
-          <div class="card" style="width: 18rem;">
-            <img src="{{'..'}}" onError="this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
-            <div class="card-body">
-              <p class="card-text">{{evolutionChain.chain.species.name}}</p>
-            </div>
-          </div>
+       
     </div>
     <p>pokemon-stats works!</p>
 </div>

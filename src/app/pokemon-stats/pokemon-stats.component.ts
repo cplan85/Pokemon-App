@@ -15,6 +15,7 @@ export class PokemonStatsComponent implements OnInit {
   abilities = '';
   currentSpecies: SpeciesInfo; 
   evolutionChain: EvolutionChainCall;
+  evoChainClean: {species_name: string, min_level: number, trigger_name: string, item: string   }[] = [];
 
   constructor(
     public currentStatsService: CurrentStatsService,
@@ -41,7 +42,19 @@ export class PokemonStatsComponent implements OnInit {
   getEvolutionChainInfo(url: string)
  {
   this.webService.getEvolutionChain(url).subscribe((resultObject) => {
-    console.log(resultObject, "evolution Chain")
+    var evoData = resultObject.chain;
+    do {
+      var evoDetails = evoData['evolution_details'][0];
+    
+      this.evoChainClean.push({
+        species_name: evoData.species.name,
+        min_level: !evoDetails ? 1 : evoDetails.min_level,
+        trigger_name: !evoDetails ? null : evoDetails.trigger.name,
+        item: !evoDetails ? null : evoDetails.item
+      });
+      evoData = evoData['evolves_to'][0];
+    } while (!!evoData && evoData.hasOwnProperty('evolves_to'));
+    console.log(this.evoChainClean, "clean Evo Chain")
     this.evolutionChain = resultObject;
   })
   }
