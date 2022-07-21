@@ -85,7 +85,7 @@
         <div class="d-flex row w-100">
             <div *ngFor="let chain of evoChainClean; let i = index" class="col-4 ">
             <div class="card mr-4 my-5 rounded-3" style="width: 18rem;">
-                <img src="{{'..'}}" onError="this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
+                <img src="{{getMatchingImage(chain.species_name)}}" onError="this.onerror=null;this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
                 <div class="card-body">
                   <p class="card-text">{{chain.species_name}}</p>
                 </div>

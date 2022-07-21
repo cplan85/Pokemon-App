@@ -5,6 +5,7 @@ import { CurrentStatsService } from '../services/current-stats.service';
 import { PokemonUrl } from '../interfaces/pokemon-url';
 import { Router } from '@angular/router';
 import { GetPokemon } from '../interfaces/get-pokemon';
+import { LocalImages } from '../interfaces/local-images';
 
 @Component({
   selector: 'app-pokemons',
@@ -13,7 +14,7 @@ import { GetPokemon } from '../interfaces/get-pokemon';
 })
 export class PokemonsComponent implements OnInit {
   pokemonsInit: PokemonUrl[] = [];
-  images: {image: string, name: string}[] = [];
+  images: LocalImages[] = [];
   fullPokemons: GetPokemon[] = [];
   constructor(
     private webService: WebService,
@@ -25,28 +26,28 @@ export class PokemonsComponent implements OnInit {
   getPokemons() {
     this.webService.getAllPokemons().subscribe((resultObject) => {
       resultObject.results.forEach((pokemon) => {
-
         this.pokemonsInit.push(pokemon);
 
         this.getImage(pokemon.url);
-        console.log('full pokemon', this.fullPokemons);
+        //console.log('full pokemon', this.fullPokemons);
       });
     });
   }
 
   getImage(url: string) {
     this.webService.getPokemon(url).subscribe((fullPokemon) => {
-     
       const id = fullPokemon.sprites.other.dream_world.front_default.replace(
         /[^0-9]/g,
         ''
       );
-      this.fullPokemons[parseInt(id)-1] = fullPokemon
-      this.images[parseInt(id) - 1] =
-        {image: fullPokemon.sprites.other.dream_world.front_default, name: fullPokemon.name}
+      this.fullPokemons[parseInt(id) - 1] = fullPokemon;
+      this.images[parseInt(id) - 1] = {
+        image: fullPokemon.sprites.other.dream_world.front_default,
+        pokemonName: fullPokemon.name,
+      };
     });
 
-    console.log(this.images, 'Images from GetImages');
+    this.localImageService.setlocalImages(this.images);
   }
 
   navigateToPokemon(index: number) {

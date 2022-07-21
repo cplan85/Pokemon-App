@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+import { LocalImages } from '../interfaces/local-images';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalImagesService {
+  localImages: LocalImages[];
 
-  constructor() { }
+  constructor() {}
+
+  setlocalImages(localImages: LocalImages[]) {
+    this.localImages = localImages;
+  }
 }
