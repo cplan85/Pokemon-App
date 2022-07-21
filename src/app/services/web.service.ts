@@ -21,7 +21,7 @@ export class WebService {
 
   getPokemon(fullUrl: string) {
     const path = fullUrl;
-    return this.http.get<GetPokemon>(path).pipe(delay(1000));
+    return this.http.get<GetPokemon>(path);
   }
 
   getAllTags() {

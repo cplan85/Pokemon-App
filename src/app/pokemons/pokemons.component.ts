@@ -1,3 +1,4 @@
+import { LocalPokemonsService } from './../services/local-pokemons.service';
 import { LocalImagesService } from './../services/local-images.service';
 import { Component, OnInit } from '@angular/core';
 import { WebService } from '../services/web.service';
@@ -6,7 +7,6 @@ import { PokemonUrl } from '../interfaces/pokemon-url';
 import { Router } from '@angular/router';
 import { GetPokemon } from '../interfaces/get-pokemon';
 import { LocalImages } from '../interfaces/local-images';
-import { LocalPokemonsService } from '../services/local-pokemons.service';
 
 @Component({
   selector: 'app-pokemons',
@@ -26,13 +26,20 @@ export class PokemonsComponent implements OnInit {
   ) {}
 
   getPokemons() {
-    this.webService.getAllPokemons().subscribe((resultObject) => {
-      resultObject.results.forEach((pokemon) => {
-        this.pokemonsInit.push(pokemon);
+    if (this.localPokemonService.localPokemonsInit.length === 0) {
+      this.webService.getAllPokemons().subscribe((resultObject) => {
+        resultObject.results.forEach((pokemon) => {
+          this.pokemonsInit.push(pokemon);
 
-        this.getImage_and_fullPokemon(pokemon.url);
+          this.getImage_and_fullPokemon(pokemon.url);
+        });
+        this.localPokemonService.setlocalPokemonsInit(this.pokemonsInit);
       });
-    });
+    } else {
+      this.pokemonsInit = this.localPokemonService.localPokemonsInit;
+      this.fullPokemons = this.localPokemonService.localPokemons;
+      this.images = this.localImageService.localImages;
+    }
   }
 
   getImage_and_fullPokemon(url: string) {
@@ -47,6 +54,7 @@ export class PokemonsComponent implements OnInit {
         pokemonName: fullPokemon.name,
       };
     });
+    console.log(this.fullPokemons, 'full pokemons');
     this.localPokemonService.setlocalPokemons(this.fullPokemons);
     this.localImageService.setlocalImages(this.images);
   }

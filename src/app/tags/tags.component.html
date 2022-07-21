@@ -1,6 +1,11 @@
 
 <div class="d-flex flex-row flex-wrap">
     <div *ngFor="let tag of tags; let i = index">
-        <button type="button" class="m-2 btn btn-outline-dark tag-button">{{tag.name}}</button>
+        <button 
+        type="button" 
+        (click)="toggleTag(i)" 
+        [ngClass]="tag.toggled ? 'btn btn-dark': 'btn-outline-dark'" 
+        class="m-2 btn tag-button">{{tag.name}}</button>
         </div>
+        <p>{{activeTags.toString()}}</p>
 </div>
