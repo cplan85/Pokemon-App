@@ -14,15 +14,15 @@ import { LocalImages } from '../interfaces/local-images';
   styleUrls: ['./pokemons.component.scss'],
 })
 export class PokemonsComponent implements OnInit {
-  pokemonsInit: PokemonUrl[] = [];
+  pokemonsInit: PokemonUrl[] = this.localPokemonService.localPokemonsInit;
   images: LocalImages[] = [];
   fullPokemons: GetPokemon[] = [];
   constructor(
     private webService: WebService,
     public router: Router,
     private currentStatsService: CurrentStatsService,
-    private localImageService: LocalImagesService,
-    private localPokemonService: LocalPokemonsService
+    public localImageService: LocalImagesService,
+    public localPokemonService: LocalPokemonsService
   ) {}
 
   getPokemons() {
@@ -54,13 +54,14 @@ export class PokemonsComponent implements OnInit {
         pokemonName: fullPokemon.name,
       };
     });
-    console.log(this.fullPokemons, 'full pokemons');
     this.localPokemonService.setlocalPokemons(this.fullPokemons);
     this.localImageService.setlocalImages(this.images);
   }
 
   navigateToPokemon(index: number) {
-    this.currentStatsService.setCurrentPokemon(this.fullPokemons[index]);
+    this.currentStatsService.setCurrentPokemon(
+      this.localPokemonService.localPokemons[index]
+    );
     this.router.navigate(['stats'], {
       queryParams: {
         id: index,
