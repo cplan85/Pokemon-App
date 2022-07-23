@@ -7,7 +7,10 @@
     
         class="link-secondary text-decoration-none">
             <div class="shadow card w-100 my-2" style="width: 18rem;">
-                <p class="m-3 card-title">{{pokemon.name}}</p>
+                <p class="m-3 card-title"
+                [innerHtml] ="pokemon.name | highlightText : this.searchService.getSearchString()"
+                >
+                </p>
                 <img 
                 src="{{localImageService.localImages[i].image}}" 
                 onError="this.onerror=null;this.src='../../assets/missing.png'" 

@@ -1,9 +1,7 @@
 <h1>Pokemon App</h1>
-<form>
+<form [formGroup]="pokemonFinder" (keyup)="filter()">
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      <input type="text" formControlName="queryName" [ngModel]="queryName" class="form-control" placeholder="Search by Name" id="searchBar" aria-describedby="searchHelp">
     </div>
   </form>
   <app-tags></app-tags>

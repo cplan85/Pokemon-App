@@ -7,6 +7,7 @@ import { PokemonUrl } from '../interfaces/pokemon-url';
 import { Router } from '@angular/router';
 import { GetPokemon } from '../interfaces/get-pokemon';
 import { LocalImages } from '../interfaces/local-images';
+import { SearchService } from '../services/search.service';
 
 @Component({
   selector: 'app-pokemons',
@@ -22,7 +23,8 @@ export class PokemonsComponent implements OnInit {
     public router: Router,
     private currentStatsService: CurrentStatsService,
     public localImageService: LocalImagesService,
-    public localPokemonService: LocalPokemonsService
+    public localPokemonService: LocalPokemonsService,
+    public searchService: SearchService
   ) {}
 
   getPokemons() {
