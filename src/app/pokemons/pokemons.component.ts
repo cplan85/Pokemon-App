@@ -18,6 +18,7 @@ export class PokemonsComponent implements OnInit {
   pokemonsInit: PokemonUrl[] = this.localPokemonService.localPokemonsInit;
   images: LocalImages[] = [];
   fullPokemons: GetPokemon[] = [];
+  temporaryPokemons: GetPokemon[] = [];
   constructor(
     private webService: WebService,
     public router: Router,
@@ -64,10 +65,10 @@ export class PokemonsComponent implements OnInit {
     });
     this.localPokemonService.setlocalPokemons(this.fullPokemons);
     this.localImageService.setlocalImages(this.images);
-    console.log(this.images, 'images');
   }
 
   navigateToPokemon(index: number) {
+    // this.localPokemonService.setlocalPokemons(this.temporaryPokemons);
     this.currentStatsService.setCurrentPokemon(
       this.localPokemonService.localPokemons[index]
     );

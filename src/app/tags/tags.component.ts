@@ -73,13 +73,17 @@ export class TagsComponent implements OnInit {
     }
   }
 
+  duplicateArray(array: any[]) {
+    return array.map((object) => object);
+  }
+
   toggleTag(index: number) {
     if (this.temporaryPokemons.length === 0) {
-      this.temporaryPokemons = this.localPokemonService.localPokemons.map(
-        (object) => object
+      this.temporaryPokemons = this.duplicateArray(
+        this.localPokemonService.localPokemons
       );
-      this.temporaryImages = this.localImagesService.localImages.map(
-        (object) => object
+      this.temporaryImages = this.duplicateArray(
+        this.localImagesService.localImages
       );
     }
     this.tags[index].toggled = !this.tags[index].toggled;

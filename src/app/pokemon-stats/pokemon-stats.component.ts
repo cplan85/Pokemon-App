@@ -31,10 +31,23 @@ export class PokemonStatsComponent implements OnInit {
   ) {}
 
   convertAbilitiesToStr() {
-    console.log(this.currentPokemon.abilities);
     this.abilities = this.currentPokemon.abilities
-      .map((user) => user.ability.name)
-      .toString();
+      .map((user) => {
+        return this.capitalizeStrings(user.ability.name);
+      })
+      .join(', ');
+  }
+
+  capitalizeStrings(string: string) {
+    const capitalizedType = string.charAt(0).toUpperCase() + string.slice(1);
+    return capitalizedType;
+  }
+
+  convertTypesArrtoString() {
+    let individualPokemonTypes = this.currentPokemon.types.map((object) => {
+      return this.capitalizeStrings(object.type.name);
+    });
+    return individualPokemonTypes.join(', ');
   }
 
   getSpeciesInfo(pokemonName: string) {

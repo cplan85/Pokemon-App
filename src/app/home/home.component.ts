@@ -5,6 +5,7 @@ import { LocalPokemonsService } from '../services/local-pokemons.service';
 import { GetPokemon } from '../interfaces/get-pokemon';
 import { Validators } from '@angular/forms';
 import { SearchService } from '../services/search.service';
+import { LocalImages } from '../interfaces/local-images';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
   queryName = '';
   localPokemons: GetPokemon[] = [];
   temporaryPokemons: GetPokemon[] = [];
+
   constructor(
     private _builder: FormBuilder,
     private localPokemonService: LocalPokemonsService,
@@ -29,13 +31,38 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  duplicateArray(array: any[]) {
+    return array.map((object) => object);
+  }
+
+  getFilteredImages(filtered: GetPokemon[]) {
+    const localImages: LocalImages[] = [];
+    const filteredCopy = this.duplicateArray(filtered);
+
+    filteredCopy.forEach((fullPokemon) => {
+      const imgURL = fullPokemon.sprites.other.dream_world.front_default;
+      const fixedURL = imgURL.replace(
+        'master/https://raw.githubusercontent.com/PokeAPI/sprites/',
+        ''
+      );
+      const id = fullPokemon.sprites.other.dream_world.front_default.replace(
+        /[^0-9]/g,
+        ''
+      );
+      localImages[parseInt(id) - 1] = {
+        image: fixedURL,
+        pokemonName: fullPokemon.name,
+      };
+    });
+    this.localImagesService.setlocalImages(localImages);
+  }
+
   filter() {
     if (!this.hasFilterBegan) {
       this.temporaryPokemons = this.localPokemonService.localPokemons.map(
         (object) => object
       );
     }
-    console.log(this.temporaryPokemons, 'tempory Pokemons');
     this.hasFilterBegan = true;
 
     let queryName = this.pokemonFinder.value['queryName'];
@@ -43,22 +70,23 @@ export class HomeComponent implements OnInit {
       ? (this.searchByName = true)
       : (this.searchByName = false);
     this.findByName(queryName);
+    // this.getFilteredImages(this.localPokemonService.localPokemons);
     this.searchService.setSearchString(queryName);
   }
 
   findByName(nameValue: string) {
     this.localPokemons = this.localPokemonService.localPokemons;
-    let filteredItem = this.localPokemonService.localPokemons.filter(
-      (fullPokemon) =>
-        fullPokemon.name.toLowerCase().includes(nameValue.toLowerCase())
+    let filteredItem = this.temporaryPokemons.filter((fullPokemon) =>
+      fullPokemon.name.toLowerCase().includes(nameValue.toLowerCase())
     );
-
+    console.log('filteredItem', filteredItem);
     this.localPokemons.splice(0, this.localPokemons.length);
     nameValue.length > 0
       ? this.localPokemons.push(...filteredItem)
       : this.localPokemons.push(...this.temporaryPokemons);
 
     this.localPokemonService.setlocalPokemons(this.localPokemons);
+    //this.getFilteredImages(this.duplicateArray(filteredItem));
   }
 
   ngOnInit(): void {}

@@ -1,6 +1,6 @@
 <div class="container">
     <h1>{{currentPokemon.name | titlecase}}</h1>
-    <div class="row top-stats my-5">
+    <div class="row top-stats my-5 p-5">
         <div class="col-8">
             <div class="row">
                 <div class="col-sm-4
@@ -13,13 +13,13 @@
                 col-lg-3
                 col-6">
                     <h2>Abilities</h2>
-                    <p>{{abilities}} ft</p>
+                    <p>{{abilities}}</p>
                 </div>
                 <div class="col-sm-4
                 col-lg-3
                 col-6">
                     <h2>Types</h2>
-                    <p>{{abilities}}</p>
+                    <p>{{convertTypesArrtoString()}}</p>
                 </div>
                 <div class="col-sm-4
                 col-lg-3
@@ -46,8 +46,8 @@
             <img src="{{currentPokemon.sprites.other['official-artwork'].front_default}}" class="img-fluid w-100 p-2 mx-auto d-block" alt="...">
         </div>
     </div>
-    <div class="mid-stats my-5">
-        <h2>Species Information</h2>
+    <div class="mid-stats my-5 p-5">
+        <h2 class="py-2">Species Information</h2>
         <div class="row d-flex flex-row flex-wrap">
             <div class="col-2">
             <h3>Name</h3>
@@ -79,13 +79,19 @@
         </div>
         </div>
     </div>
-    <div class="evolution-stats my-5 ">
+    <div class="evolution-stats my-5 p-5">
         <h2>Evolution Chain</h2>
 
         <div class="d-flex row w-100">
-            <div *ngFor="let chain of evoChainClean; let i = index" class="col-4 ">
-            <div class="card mr-4 my-5 rounded-3" style="width: 18rem;">
-                <img src="{{getMatchingImage(chain.species_name)}}" onError="this.onerror=null;this.src='../../assets/missing.png'" class="card-img-top w-50" alt="...">
+            <div *ngFor="let chain of evoChainClean; let i = index" class="col-12 col-sm-6 col-md-4">
+            <div class="card 
+            mr-4 my-5 rounded-3 
+            d-flex 
+            align-items-center 
+            justify-content-center">
+                <img src="{{getMatchingImage(chain.species_name)}}"
+                 onError="this.onerror=null;this.src='../../assets/missing.png'"
+                  class="card-img w-50 my-2" alt="...">
                 <div class="card-body">
                   <p class="card-text">{{chain.species_name}}</p>
                 </div>
