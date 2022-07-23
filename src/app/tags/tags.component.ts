@@ -18,6 +18,12 @@ export class TagsComponent implements OnInit {
   temporaryPokemons: GetPokemon[] = [];
   temporaryImages: LocalImages[];
 
+  constructor(
+    private webService: WebService,
+    private localPokemonService: LocalPokemonsService,
+    private localImagesService: LocalImagesService
+  ) {}
+
   getTags() {
     this.webService.getAllTags().subscribe((resultObject) => {
       resultObject.results.forEach((tag) => {
@@ -38,12 +44,14 @@ export class TagsComponent implements OnInit {
   }
 
   filterPokemons() {
+    const booleanCheck = this.activeTags.join('|');
+    const regex = new RegExp(`${booleanCheck}`, 'g');
+    console.log(regex);
     const localImages: LocalImages[] = [];
-    const filtered = this.localPokemonService.localPokemons.filter(
-      (fullPokemon) => {
-        return fullPokemon.typesSimplified!.includes(this.activeTags[0]);
-      }
-    );
+    const filtered = this.temporaryPokemons.filter((fullPokemon) => {
+      return regex.test(fullPokemon.typesSimplified!);
+      // return fullPokemon.typesSimplified!.includes(eval(booleanCheck));
+    });
 
     filtered.forEach((fullPokemon) => {
       const id = fullPokemon.sprites.other.dream_world.front_default.replace(
@@ -60,8 +68,6 @@ export class TagsComponent implements OnInit {
       this.localPokemonService.setlocalPokemons(filtered);
       this.localImagesService.setlocalImages(localImages);
     } else {
-      console.log("I'm at zero");
-
       this.localPokemonService.setlocalPokemons(this.temporaryPokemons);
       this.localImagesService.setlocalImages(this.temporaryImages);
     }
@@ -77,19 +83,12 @@ export class TagsComponent implements OnInit {
       );
     }
     this.tags[index].toggled = !this.tags[index].toggled;
-    // console.log(this.tags, 'toggled');
     this.tags[index].toggled
       ? this.activeTags.push(this.tags[index].name)
       : this.activeTags.splice(this.activeTags.indexOf(this.tags[index].name));
 
     this.convertTypesArrtoString();
-    console.log(this.activeTags);
   }
-  constructor(
-    private webService: WebService,
-    private localPokemonService: LocalPokemonsService,
-    private localImagesService: LocalImagesService
-  ) {}
 
   ngOnInit(): void {
     this.getTags();

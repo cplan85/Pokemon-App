@@ -71,6 +71,7 @@ export class PokemonStatsComponent implements OnInit {
       console.log(this.evoChainClean, 'clean Evo Chain');
       this.evolutionChain = resultObject;
     });
+    console.log(this.evoChainClean, 'evolution chain');
   }
 
   ngOnInit(): void {

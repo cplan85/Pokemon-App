@@ -46,18 +46,25 @@ export class PokemonsComponent implements OnInit {
 
   getImage_and_fullPokemon(url: string) {
     this.webService.getPokemon(url).subscribe((fullPokemon) => {
+      const imgURL = fullPokemon.sprites.other.dream_world.front_default;
+      const fixedURL = imgURL.replace(
+        'master/https://raw.githubusercontent.com/PokeAPI/sprites/',
+        ''
+      );
+
       const id = fullPokemon.sprites.other.dream_world.front_default.replace(
         /[^0-9]/g,
         ''
       );
       this.fullPokemons[parseInt(id) - 1] = fullPokemon;
       this.images[parseInt(id) - 1] = {
-        image: fullPokemon.sprites.other.dream_world.front_default,
+        image: fixedURL,
         pokemonName: fullPokemon.name,
       };
     });
     this.localPokemonService.setlocalPokemons(this.fullPokemons);
     this.localImageService.setlocalImages(this.images);
+    console.log(this.images, 'images');
   }
 
   navigateToPokemon(index: number) {
