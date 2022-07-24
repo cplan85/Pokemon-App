@@ -5,6 +5,7 @@ import { GetPokemon } from '../interfaces/get-pokemon';
 import { WebService } from '../services/web.service';
 import { SpeciesInfo } from '../interfaces/species-info';
 import { EvolutionChainCall } from '../interfaces/evolution-chain';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-stats',
@@ -27,7 +28,8 @@ export class PokemonStatsComponent implements OnInit {
   constructor(
     public currentStatsService: CurrentStatsService,
     public localImageService: LocalImagesService,
-    private webService: WebService
+    private webService: WebService,
+    public router: Router
   ) {}
 
   convertAbilitiesToStr() {
@@ -54,7 +56,7 @@ export class PokemonStatsComponent implements OnInit {
     this.webService.getSpeciesInfo(pokemonName).subscribe((resultObject) => {
       this.currentStatsService.setCurrentSpecies(resultObject);
       this.currentSpecies = resultObject;
-      // console.log(resultObject, 'species');
+      console.log(resultObject, 'species');
       this.getEvolutionChainInfo(resultObject.evolution_chain.url);
     });
   }
@@ -85,6 +87,10 @@ export class PokemonStatsComponent implements OnInit {
       this.evolutionChain = resultObject;
     });
     console.log(this.evoChainClean, 'evolution chain');
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/']);
   }
 
   ngOnInit(): void {
