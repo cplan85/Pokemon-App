@@ -1,4 +1,3 @@
-import { LocalImagesService } from './../services/local-images.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { LocalPokemonsService } from '../services/local-pokemons.service';
@@ -23,7 +22,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private _builder: FormBuilder,
     private localPokemonService: LocalPokemonsService,
-    private localImagesService: LocalImagesService,
     private searchService: SearchService
   ) {
     this.pokemonFinder = this._builder.group({
@@ -35,32 +33,10 @@ export class HomeComponent implements OnInit {
     return array.map((object) => object);
   }
 
-  getFilteredImages(filtered: GetPokemon[]) {
-    const localImages: LocalImages[] = [];
-    const filteredCopy = this.duplicateArray(filtered);
-
-    filteredCopy.forEach((fullPokemon) => {
-      const imgURL = fullPokemon.sprites.other.dream_world.front_default;
-      const fixedURL = imgURL.replace(
-        'master/https://raw.githubusercontent.com/PokeAPI/sprites/',
-        ''
-      );
-      const id = fullPokemon.sprites.other.dream_world.front_default.replace(
-        /[^0-9]/g,
-        ''
-      );
-      localImages[parseInt(id) - 1] = {
-        image: fixedURL,
-        pokemonName: fullPokemon.name,
-      };
-    });
-    this.localImagesService.setlocalImages(localImages);
-  }
-
   filter() {
     if (!this.hasFilterBegan) {
-      this.temporaryPokemons = this.localPokemonService.localPokemons.map(
-        (object) => object
+      this.temporaryPokemons = this.duplicateArray(
+        this.localPokemonService.localPokemons
       );
     }
     this.hasFilterBegan = true;
@@ -70,23 +46,21 @@ export class HomeComponent implements OnInit {
       ? (this.searchByName = true)
       : (this.searchByName = false);
     this.findByName(queryName);
-    // this.getFilteredImages(this.localPokemonService.localPokemons);
     this.searchService.setSearchString(queryName);
   }
 
   findByName(nameValue: string) {
+    const localImages: LocalImages[] = [];
     this.localPokemons = this.localPokemonService.localPokemons;
     let filteredItem = this.temporaryPokemons.filter((fullPokemon) =>
       fullPokemon.name.toLowerCase().includes(nameValue.toLowerCase())
     );
-    console.log('filteredItem', filteredItem);
-    this.localPokemons.splice(0, this.localPokemons.length);
-    nameValue.length > 0
-      ? this.localPokemons.push(...filteredItem)
-      : this.localPokemons.push(...this.temporaryPokemons);
 
-    this.localPokemonService.setlocalPokemons(this.localPokemons);
-    //this.getFilteredImages(this.duplicateArray(filteredItem));
+    if (nameValue.length > 0) {
+      this.localPokemonService.setlocalPokemons(filteredItem);
+    } else {
+      this.localPokemonService.setlocalPokemons(this.temporaryPokemons);
+    }
   }
 
   ngOnInit(): void {}

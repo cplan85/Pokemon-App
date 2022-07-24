@@ -22,6 +22,7 @@ export interface GetPokemon {
   weight: number;
   sprites: { other: PokeImages };
   height: number;
+  imageSimplified?: string;
 }
 
 interface TypeObject {

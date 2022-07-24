@@ -1,10 +1,8 @@
-import { LocalImagesService } from './../services/local-images.service';
 import { LocalPokemonsService } from './../services/local-pokemons.service';
 import { Component, OnInit } from '@angular/core';
 import { WebService } from '../services/web.service';
 import { Tag } from '../interfaces/tag';
 import { GetPokemon } from '../interfaces/get-pokemon';
-import { LocalImages } from '../interfaces/local-images';
 
 @Component({
   selector: 'app-tags',
@@ -16,20 +14,24 @@ export class TagsComponent implements OnInit {
   activeTags: string[] = [];
   typesAsString: string[];
   temporaryPokemons: GetPokemon[] = [];
-  temporaryImages: LocalImages[];
 
   constructor(
     private webService: WebService,
-    private localPokemonService: LocalPokemonsService,
-    private localImagesService: LocalImagesService
+    public localPokemonService: LocalPokemonsService
   ) {}
 
   getTags() {
-    this.webService.getAllTags().subscribe((resultObject) => {
-      resultObject.results.forEach((tag) => {
-        this.tags.push({ name: tag.name, url: tag.url, toggled: false });
+    if (this.localPokemonService.tags.length === 0) {
+      this.webService.getAllTags().subscribe((resultObject) => {
+        resultObject.results.forEach((tag) => {
+          this.tags.push({ name: tag.name, url: tag.url, toggled: false });
+        });
       });
-    });
+    } else {
+      this.tags = this.localPokemonService.tags;
+    }
+
+    this.localPokemonService.setTags(this.tags);
   }
 
   convertTypesArrtoString() {
@@ -39,37 +41,19 @@ export class TagsComponent implements OnInit {
       });
       fullPokemon.typesSimplified = individualPokemonTypes.toString();
     });
-    console.log(this.localPokemonService.localPokemons);
     this.filterPokemons();
   }
 
   filterPokemons() {
     const booleanCheck = this.activeTags.join('|');
-    const regex = new RegExp(`${booleanCheck}`, 'g');
-    console.log(regex);
-    const localImages: LocalImages[] = [];
-    const filtered = this.temporaryPokemons.filter((fullPokemon) => {
-      return regex.test(fullPokemon.typesSimplified!);
-      // return fullPokemon.typesSimplified!.includes(eval(booleanCheck));
-    });
-
-    filtered.forEach((fullPokemon) => {
-      const id = fullPokemon.sprites.other.dream_world.front_default.replace(
-        /[^0-9]/g,
-        ''
-      );
-      localImages[parseInt(id) - 1] = {
-        image: fullPokemon.sprites.other.dream_world.front_default,
-        pokemonName: fullPokemon.name,
-      };
+    const filtered = this.temporaryPokemons.filter((fullPokemon, id) => {
+      return new RegExp(booleanCheck, 'ig').test(fullPokemon.typesSimplified!);
     });
 
     if (this.activeTags.length > 0) {
       this.localPokemonService.setlocalPokemons(filtered);
-      this.localImagesService.setlocalImages(localImages);
     } else {
       this.localPokemonService.setlocalPokemons(this.temporaryPokemons);
-      this.localImagesService.setlocalImages(this.temporaryImages);
     }
   }
 
@@ -81,9 +65,6 @@ export class TagsComponent implements OnInit {
     if (this.temporaryPokemons.length === 0) {
       this.temporaryPokemons = this.duplicateArray(
         this.localPokemonService.localPokemons
-      );
-      this.temporaryImages = this.duplicateArray(
-        this.localImagesService.localImages
       );
     }
     this.tags[index].toggled = !this.tags[index].toggled;

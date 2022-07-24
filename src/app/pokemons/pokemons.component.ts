@@ -3,7 +3,6 @@ import { LocalImagesService } from './../services/local-images.service';
 import { Component, OnInit } from '@angular/core';
 import { WebService } from '../services/web.service';
 import { CurrentStatsService } from '../services/current-stats.service';
-import { PokemonUrl } from '../interfaces/pokemon-url';
 import { Router } from '@angular/router';
 import { GetPokemon } from '../interfaces/get-pokemon';
 import { LocalImages } from '../interfaces/local-images';
@@ -15,7 +14,6 @@ import { SearchService } from '../services/search.service';
   styleUrls: ['./pokemons.component.scss'],
 })
 export class PokemonsComponent implements OnInit {
-  pokemonsInit: PokemonUrl[] = this.localPokemonService.localPokemonsInit;
   images: LocalImages[] = [];
   fullPokemons: GetPokemon[] = [];
   temporaryPokemons: GetPokemon[] = [];
@@ -32,14 +30,10 @@ export class PokemonsComponent implements OnInit {
     if (this.localPokemonService.localPokemonsInit.length === 0) {
       this.webService.getAllPokemons().subscribe((resultObject) => {
         resultObject.results.forEach((pokemon) => {
-          this.pokemonsInit.push(pokemon);
-
           this.getImage_and_fullPokemon(pokemon.url);
         });
-        this.localPokemonService.setlocalPokemonsInit(this.pokemonsInit);
       });
     } else {
-      this.pokemonsInit = this.localPokemonService.localPokemonsInit;
       this.fullPokemons = this.localPokemonService.localPokemons;
       this.images = this.localImageService.localImages;
     }
@@ -58,6 +52,7 @@ export class PokemonsComponent implements OnInit {
         ''
       );
       this.fullPokemons[parseInt(id) - 1] = fullPokemon;
+      this.fullPokemons[parseInt(id) - 1].imageSimplified = fixedURL;
       this.images[parseInt(id) - 1] = {
         image: fixedURL,
         pokemonName: fullPokemon.name,
@@ -65,10 +60,11 @@ export class PokemonsComponent implements OnInit {
     });
     this.localPokemonService.setlocalPokemons(this.fullPokemons);
     this.localImageService.setlocalImages(this.images);
+
+    this.temporaryPokemons = this.fullPokemons;
   }
 
   navigateToPokemon(index: number) {
-    // this.localPokemonService.setlocalPokemons(this.temporaryPokemons);
     this.currentStatsService.setCurrentPokemon(
       this.localPokemonService.localPokemons[index]
     );

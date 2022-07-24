@@ -7,5 +7,16 @@
         [ngClass]="tag.toggled ? 'btn btn-dark': 'btn-outline-dark'" 
         class="m-2 btn tag-button">{{tag.name}}</button>
         </div>
-        <p>{{activeTags.toString()}}</p>
 </div>
+
+<div 
+class="success m-2 p-2"
+*ngIf="localPokemonService.localPokemons.length > 0 && activeTags.length > 0;">
+    Found {{localPokemonService.localPokemons.length}} Pokemons matching {{activeTags.join(' or ')}}.
+  </div>
+
+  <div 
+  class="fail m-2 p-2"
+  *ngIf="localPokemonService.localPokemons.length === 0 && activeTags.length > 0;">
+    Sorry, No Pokemon Found
+  </div>
