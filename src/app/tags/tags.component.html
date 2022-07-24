@@ -4,8 +4,8 @@
         <button 
         type="button" 
         (click)="toggleTag(i)" 
-        [ngClass]="tag.toggled ? 'btn btn-dark': 'btn-outline-dark'" 
-        class="m-2 btn tag-button">{{tag.name}}</button>
+        [ngClass]="tag.toggled ? 'tagBg-activated': 'btn-outline-dark'" 
+        class="m-2 btn tag-button tagBg-{{tag.name}}">{{tag.name}}</button>
         </div>
 </div>
 

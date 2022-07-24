@@ -1,29 +1,37 @@
 <div class="container">
     <h1>{{currentPokemon.name | titlecase}}</h1>
+    <button 
+    type="button" 
+    
+    class="m-2 btn btn-outline-dark">Back Home</button>
     <div class="row top-stats my-5 p-5">
         <div class="col-8">
             <div class="row">
-                <div class="col-sm-4
+                <div class="col-sm-6
+                col-md-4
                 col-lg-3
-                col-6">
+                col-12">
                     <h2>Height</h2>
                     <p>{{currentPokemon.height}} ft</p>
                 </div>
-                <div class="col-sm-4
+                <div class="col-sm-6
+                col-md-4
                 col-lg-3
-                col-6">
+                col-12">
                     <h2>Abilities</h2>
                     <p>{{abilities}}</p>
                 </div>
-                <div class="col-sm-4
+                <div class="col-sm-6
+                col-md-4
                 col-lg-3
-                col-6">
+                col-12">
                     <h2>Types</h2>
                     <p>{{convertTypesArrtoString()}}</p>
                 </div>
-                <div class="col-sm-4
+                <div class="col-sm-6
+                col-md-4
                 col-lg-3
-                col-6">
+                col-12">
                     <h2>Weight</h2>
                     <p>{{currentPokemon.weight}} lbs</p>
                 </div>
@@ -49,31 +57,31 @@
     <div class="mid-stats my-5 p-5">
         <h2 class="py-2">Species Information</h2>
         <div class="row d-flex flex-row flex-wrap">
-            <div class="col-2">
+            <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <h3>Name</h3>
             <p>{{currentPokemon.name}}</p>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <h3>Generation</h3>
             <p>{{currentSpecies.generation.name}}</p>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <h3>Genus</h3>
             <p>{{currentSpecies.genera[0].genus}}</p>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <h3>Color</h3>
             <p>{{currentSpecies.color.name}}</p>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <h3>Habitat</h3>
             <p>{{currentSpecies.habitat.name}}</p>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <h3>Capture Rate</h3>
             <p>{{currentSpecies.capture_rate}}</p>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-12">
             <h3>Growth Rate</h3>
             <p>{{currentSpecies.growth_rate.name}}</p>
         </div>

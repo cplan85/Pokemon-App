@@ -6,7 +6,7 @@
         <a (click)="navigateToPokemon(i)"
     
         class="link-secondary text-decoration-none">
-            <div class="shadow card w-100 my-2" style="width: 18rem;">
+            <div class="shadow card w-100 my-2 bg-{{pokemon.typesArr? pokemon.typesArr[0]: 'none'}}" style="width: 18rem;">
                 <p class="m-3 card-title"
                 [innerHtml] ="pokemon.name | highlightText : this.searchService.getSearchString()"
                 >

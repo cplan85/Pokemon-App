@@ -51,8 +51,15 @@ export class PokemonsComponent implements OnInit {
         /[^0-9]/g,
         ''
       );
+
+      let pokemonTypesArr = fullPokemon.types.map((object) => {
+        return object.type.name;
+      });
+
       this.fullPokemons[parseInt(id) - 1] = fullPokemon;
       this.fullPokemons[parseInt(id) - 1].imageSimplified = fixedURL;
+      this.fullPokemons[parseInt(id) - 1].typesArr = pokemonTypesArr;
+      console.log(this.fullPokemons[parseInt(id) - 1].typesArr);
       this.images[parseInt(id) - 1] = {
         image: fixedURL,
         pokemonName: fullPokemon.name,

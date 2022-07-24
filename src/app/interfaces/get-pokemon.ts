@@ -18,6 +18,7 @@ export interface GetPokemon {
     base_stat: number;
   }[];
   types: { slot: number; type: TypeObject }[];
+  typesArr?: string[];
   typesSimplified?: string;
   weight: number;
   sprites: { other: PokeImages };
