@@ -16,7 +16,9 @@
                 onError="this.onerror=null;this.src='../../assets/missing.png'" 
                 class="img-fluid w-50 mx-auto d-block card-image" alt="...">
                 <div class="card-body">
-                  <!-- <p class="card-text">{{pokemon.name}}</p> -->
+                   <div 
+                   class="bg-{{type}} element-circles shadow"
+                   *ngFor="let type of pokemon.typesArr; let i = index"></div> 
                 </div>
               </div>
               </a>

@@ -49,3 +49,76 @@ a {
     background-color: #a33e9d;
     color: #fff;
 }
+
+.bg-flying {
+    background-color: #8899ff;
+}
+
+.bg-electric {
+    background-color: #ffcc33;;
+}
+
+.bg-ground {
+    background-color: #ddbb55;
+    
+}
+
+.bg-fairy {
+    background-color: #ee99ee;
+    
+}
+
+.bg-fighting {
+    background-color: #bb5544;
+   
+}
+
+.bg-psychic {
+    background-color: #fb95be;  
+}
+
+.bg-steel {
+    background-color: #aaaabb;
+    
+}
+
+.bg-ice {
+    background-color: #66ccff;
+   
+}
+
+.bg-rock {
+    background-color: #bbaa66;
+    
+}
+
+.bg-ghost {
+    background-color: #6666bb;
+    //color: white;
+}
+
+.bg-dragon {
+    background-color: #7766ee;
+    //color: white;
+}
+
+.bg-dark {
+    background-color: #775544 !important;
+    //color: white;
+}
+
+.card-body{
+    position:absolute;
+    bottom:10%;
+}
+
+.element-circles{
+    margin-right:1rem;
+    display:inline-block;
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    border-width:.5px;
+    border-color:#a9a9a9;
+    border-style:solid;
+}
