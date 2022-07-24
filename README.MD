@@ -1,4 +1,6 @@
-# PokemonApp
+# Pokemon App
+
+The Pokemon App is an Angular application that uses the [Poke API](https://pokeapi.co/) to load and filter through Pokemon Cards. This is Challenge #4 from [NUWE's IT Academy - Lliga de Programació](https://nuwe.io/event/it-academy-liga-de-programacion).
 
 ## **Preview**
 
@@ -8,7 +10,7 @@
 
 ## :wrench: **Tech used in this project**
 
-In this project I used Angular and Boostrap5 to develop a web app that initially loads 24 Pokemon Cards with Angular's Http Client and upon clicking any of the cards the user is presented with basic stats, specie's information, and evolution chain of the chosen Pokemon. The front page allows users to search by name of the loaded Pokemon and to filter Pokemons by types with different tag toggles. The background color of the cards as well as the border colors of the tags correspond to the 20 different pokemon types. The site is fully-responsive through the implementation of Bootstrap5 breakpoints.
+In this project I used Angular and Boostrap5 to develop a web app that initially loads 24 Pokemon Cards with Angular's Http Client and upon clicking any of the cards the user is presented with basic stats, specie's information, and evolution chain of the chosen Pokemon. The front page allows users to search by name of the loaded Pokemon and to filter Pokemons by types with different tag toggles. The background color of the cards as well as the border colors of the tags correspond to the 20 different pokemon types with Angular's NG class directive and conditional styling. The site is fully-responsive through the use of Bootstrap5 breakpoints.
 
 ---
 
