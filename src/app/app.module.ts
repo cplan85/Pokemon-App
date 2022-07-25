@@ -10,9 +10,6 @@ import { PokemonsComponent } from './pokemons/pokemons.component';
 import { PokemonStatsComponent } from './pokemon-stats/pokemon-stats.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HighlightTextPipe } from './pipes/highlight-text.pipe';
-import { LandingComponent } from './landing/landing.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +19,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     PokemonsComponent,
     PokemonStatsComponent,
     HighlightTextPipe,
-    LandingComponent,
-    NavbarComponent,
-    SidebarComponent,
   ],
   imports: [
     BrowserModule,
