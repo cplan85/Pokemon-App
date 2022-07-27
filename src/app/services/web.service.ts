@@ -11,11 +11,21 @@ import { EvolutionChainCall } from '../interfaces/evolution-chain';
 })
 export class WebService {
   private api = 'https://pokeapi.co/api/v2/';
+  private next: string = '';
 
   constructor(private http: HttpClient) {}
 
   getAllPokemons() {
     const path = `${this.api}pokemon/?limit=24`;
+    return this.http.get<GetRequest>(path).pipe(delay(1000));
+  }
+
+  setNextApi(url: string) {
+    this.next = url;
+  }
+
+  getNextPokemons() {
+    const path = this.next;
     return this.http.get<GetRequest>(path).pipe(delay(1000));
   }
 
