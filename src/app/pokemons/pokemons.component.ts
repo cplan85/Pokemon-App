@@ -34,8 +34,8 @@ export class PokemonsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.theLastList.changes.subscribe((d) => {
-      console.log(d, "dd")
-      if (d.last) this.observer.observe(d.last.nativeElement)
+
+      if (d.last && this.localPokemonService.localPokemons.length> 23) this.observer.observe(d.last.nativeElement)
     })
   }
 
@@ -47,6 +47,7 @@ export class PokemonsComponent implements OnInit, AfterViewInit {
     }
     
     this.observer = new IntersectionObserver( (entries)=> {
+      console.log(entries, "my entries")
       if(entries[0].isIntersecting) {
        // console.log("scroll more")
       
